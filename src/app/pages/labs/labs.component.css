@@ -1,0 +1,10 @@
+.invalidName {
+    background-color: red;
+    color: aliceblue;
+    opacity: 0;
+    transition: all linear 3s ;
+}
+
+.invalidName.active {
+    opacity: 1;
+}

@@ -1,0 +1,22 @@
+
+<h1> Hola desde {{title}} </h1>
+
+<ul>
+  <li *ngFor="let item  of items();index as i" >
+    {{i}} - {{item}}
+  </li>
+</ul>
+
+<h1> using signal</h1>
+<p>Hola {{ name() }}</p>
+<input type="text" (keydown)="onKeyDownEvent($event)"  />
+
+<br>
+<input type="color" [formControl]="colorControl" >
+<p> Color es: {{colorControl.value}}</p>
+
+
+<br>
+<span> Test Class validator </span>
+<input type="text" [formControl]="nameControl" >
+<p class="invalidName" [class.active]="nameControl.valid" > El nombre es: {{nameControl.value}}</p>

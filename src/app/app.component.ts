@@ -11,4 +11,9 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'todoapp';
+  items = [
+    'Install Angular CLI',
+    'Delete HTML',
+    'Start with Angular tutorial'
+  ];
 }
