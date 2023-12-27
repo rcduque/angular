@@ -1,4 +1,4 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, effect, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Task } from '../../models/task.model';
 import { FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
@@ -18,30 +18,12 @@ export class HomeComponent {
       Validators.required
     ]
   });
-  tasks = signal<Task[]>([
-    {
-      id: Date.now(),
-      title: 'Install Angular CLI',
-      completed: false,
-      editing: false
-    },
-    {
-      id: Date.now(),
-      title: 'Delete HTML',
-      completed: false,
-      editing: false
-    },
-    {
-      id: Date.now(),
-      title: 'Start with Angular tutorial',
-      completed: false,
-      editing: false
-    }    
-  ]);
+  tasks = signal<Task[]>([]);
 
   filter = signal('all');
   tasksByFilter = computed(()=>{
 
+    //'computed' will calculate new statuses and compose a new one base on those
     let currentFilter = this.filter();
     let currentTasks = this.tasks();
 
@@ -57,6 +39,23 @@ export class HomeComponent {
       } 
    } 
   });
+
+  constructor() {
+    //'effect' will watch signals some component but didn't return anything
+
+    let storage = localStorage.getItem('tasks');
+    if(storage){
+      this.tasks.set(JSON.parse(storage));
+    }
+
+    effect(()=>{
+
+      console.log('effect');
+      let currentTasks = this.tasks();
+      localStorage.setItem('tasks', JSON.stringify(this.tasks()));
+
+    });
+  }
 
   changeFilter(newFilter: string){
     this.filter.set(newFilter);
