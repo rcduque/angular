@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { Product } from '../models/product-model';
+import { Product } from '@models/product-model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +14,6 @@ export class ShoppingCartServiceService {
   addToShoppingCart(product:Product){
 
     this.shoppingCart.update(previous => previous.concat(product));
-    this.total.update(previous => previous + Number.parseInt(product.price));
+    this.total.update(previous => previous + product.price);
   }
 }

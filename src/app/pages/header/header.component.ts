@@ -28,7 +28,7 @@ export class HeaderComponent {
   private getTotal(){
 
     console.log("Calculando total");
-    return this.products().reduce((total, product) => total + Number.parseInt(product.price), 0);
+    return this.products().reduce((total, product) => total + product.price, 0);
 
   }
 

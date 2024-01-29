@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, signal } from '@angular/core';
-import { ProductDetailComponent } from '../product-detail/product-detail.component';
-import { HeaderComponent } from '../header/header.component';
-import { Product } from '../../models/product-model';
+import { Component, inject, signal } from '@angular/core';
+import { ProductDetailComponent } from '@components/product-detail/product-detail.component';
+import { HeaderComponent } from '@components/header/header.component';
+import { Product } from '@models/product-model';
+import { ProductService } from '@services/product.service';
 
 @Component({
   selector: 'app-product-list',
@@ -15,15 +16,18 @@ export class ProductListComponent {
 
   products = signal<Product[]>([]);
   shoppingCart = signal<Product[]>([]);
+  private productService = inject(ProductService);
 
-  constructor(){
-    this.products.set([
-        {price:"123",title:"Producto 1", img:"https://picsum.photos/200/100?r=2"},
-        {price:"124",title:"Producto 2", img:"https://picsum.photos/200/100?r=3"},
-        {price:"125",title:"Producto 3", img:"https://picsum.photos/200/100?r=4"},
-        {price:"126",title:"Producto 4", img:"https://picsum.photos/200/100?r=5"},
-        {price:"127",title:"Producto 5", img:"https://picsum.photos/200/100?r=6"}
-    ]);
+  ngOnInit(){
+
+    this.productService.getProducts()
+    .subscribe({
+      next: (products) =>{
+        this.products.set(products)
+      },
+      error: (error)=> console.log(error)
+    });
+
   }
 
   /*
