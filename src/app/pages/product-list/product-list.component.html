@@ -1,12 +1,17 @@
-<p>product-list works!</p>
-<br>
-<div class="grid grid-cols-3 gap-6">
+<div class="container mx-auto">
 
-    <app-product-detail title="Producto 1" [price]="123" img="https://picsum.photos/200/100?r=2" (addToCart)="addToCartHandler($event)" />
-    <app-product-detail title="Producto 2" [price]="124" img="https://picsum.photos/200/100?r=3" (addToCart)="addToCartHandler($event)"/>
-    <app-product-detail title="Producto 3" [price]="125" img="https://picsum.photos/200/100?r=4" (addToCart)="addToCartHandler($event)"/>
-    <app-product-detail title="Producto 4" [price]="126" img="https://picsum.photos/200/100?r=5" (addToCart)="addToCartHandler($event)"/>
-    <app-product-detail title="Producto 5" [price]="127" img="https://picsum.photos/200/100?r=6" (addToCart)="addToCartHandler($event)"/>
-    <app-product-detail title="Producto 6" [price]="128" img="https://picsum.photos/200/100?r=7" (addToCart)="addToCartHandler($event)"/>
+    <app-header [products]="shoppingCart()"/>
+
+    <p>product-list works!</p>
+    <br>
+    <div class="grid grid-cols-4 gap-6">
+
+        @for (product of products(); track product.title) {
+            <!--app-product-detail title={{product.title}} price={{product.price}} img={{product.img}} (addToCart)="addToShoppingCartHandler($event)" / -->
+            <app-product-detail [product]=product (addToCart)="addToShoppingCartHandler($event)" />
+        }
+
+    </div>
 
 </div>
+
