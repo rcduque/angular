@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { Product } from '../../models/product-model';
+import { ShoppingCartServiceService } from '../../services/shopping-cart-service.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -15,12 +16,14 @@ export class ProductDetailComponent {
   //@Input({required:true}) price: number = 0;
   //@Input({required:true}) price: string = '0';
   @Input({required:true}) product!: Product;
-  @Output() addToCart = new EventEmitter();
+  //@Output() addToCart = new EventEmitter();
+  private shoppingCartService = inject(ShoppingCartServiceService);
 
   addToCartHandler(){
 
     console.log('Adding to cart ' + this.product.title);
-    this.addToCart.emit(this.product); //llama al evento padre
+    //this.addToCart.emit(this.product); //llama al evento padre
+    this.shoppingCartService.addToShoppingCart(this.product);
 
   }
 

@@ -1,5 +1,6 @@
-import { Component, Input, SimpleChange, SimpleChanges, signal } from '@angular/core';
+import { Component, Input, SimpleChange, SimpleChanges, inject, signal } from '@angular/core';
 import { Product } from '../../models/product-model';
+import { ShoppingCartServiceService } from '../../services/shopping-cart-service.service';
 
 @Component({
   selector: 'app-header',
@@ -10,9 +11,11 @@ import { Product } from '../../models/product-model';
 })
 export class HeaderComponent {
 
-  @Input({required:true}) products : Product[] = [];
+  //@Input({required:true}) products : Product[] = [];
+  private shoppingCartService = inject(ShoppingCartServiceService);
+  products = this.shoppingCartService.shoppingCart;
   hideCartMenu = signal(true);
-  total = signal(0);
+  total = this.shoppingCartService.total;
 
   ngOnChanges(change: SimpleChange){
       this.total.set(this.getTotal());
@@ -25,7 +28,7 @@ export class HeaderComponent {
   private getTotal(){
 
     console.log("Calculando total");
-    return this.products.reduce((total, product) => total + Number.parseInt(product.price), 0);
+    return this.products().reduce((total, product) => total + Number.parseInt(product.price), 0);
 
   }
 

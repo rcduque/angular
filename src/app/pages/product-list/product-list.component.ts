@@ -26,6 +26,7 @@ export class ProductListComponent {
     ]);
   }
 
+  /*
   addToShoppingCartHandler(product: Product){
 
     console.log(this.shoppingCart().concat(product));
@@ -33,5 +34,6 @@ export class ProductListComponent {
     this.shoppingCart.set(this.shoppingCart().concat(product));
     console.log("Numero de productos " + this.shoppingCart().length);
   }
+  */
 
 }

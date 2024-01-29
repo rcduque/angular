@@ -85,7 +85,7 @@
     </div>
 
     <div>
-        @for (product of products; track $index) {
+        @for (product of products(); track $index) {
             <p> {{product.title}} - {{product.price}} </p>
         }
     </div>
