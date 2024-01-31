@@ -1,11 +1,12 @@
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
+import { RouterLinkWithHref } from '@angular/router';
 import { Product } from '@models/product-model';
 import { ShoppingCartServiceService } from '@services/shopping-cart-service.service';
 
 @Component({
   selector: 'app-product-detail',
   standalone: true,
-  imports: [],
+  imports: [RouterLinkWithHref],
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.css'
 })

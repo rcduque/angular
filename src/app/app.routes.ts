@@ -5,6 +5,7 @@ import {LabsComponent} from './pages/labs/labs.component';
 import { ProductListComponent } from './pages/product-list/product-list.component';
 import { NotFoundComponent } from '@components/not-found/not-found.component';
 import { LayoutComponent } from '@components/layout/layout.component';
+import { DetailComponent } from '@components/detail/detail.component';
 
 export const routes: Routes = [
     { 
@@ -14,6 +15,7 @@ export const routes: Routes = [
             { path : 'home',  component : HomeComponent },
             { path : 'products',  component : ProductListComponent },
             { path : 'labs',  component : LabsComponent },
+            { path : 'product/:id',  component : DetailComponent },
         ] 
     },
     { path : '**',  component : NotFoundComponent }
